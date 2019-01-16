@@ -5,12 +5,12 @@ const crypto = require("crypto");
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
-        trim: ture,
+        trim: true,
         required: true
     },
     email: {
         type: String,
-        trim: ture,
+        trim: true,
         required: true
     },
     hashed_password: {
