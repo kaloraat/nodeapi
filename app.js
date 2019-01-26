@@ -6,10 +6,12 @@ const bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 const expressValidator = require("express-validator");
 const fs = require("fs");
+const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
 
 // db
+// MONGO_URI=mongodb://kaloraat:dhungel8@ds257054.mlab.com:57054/nodeapi
 // MONGO_URI=mongodb://localhost/nodeapi
 mongoose
     .connect(
@@ -44,6 +46,7 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(expressValidator());
+app.use(cors());
 app.use("/", postRoutes);
 app.use("/", authRoutes);
 app.use("/", userRoutes);
