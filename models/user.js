@@ -26,6 +26,10 @@ const userSchema = new mongoose.Schema({
     photo: {
         data: Buffer,
         contentType: String
+    },
+    about: {
+        type: String,
+        trim: true
     }
 });
 
