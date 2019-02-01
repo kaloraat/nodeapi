@@ -111,3 +111,8 @@ exports.deletePost = (req, res) => {
         });
     });
 };
+
+exports.photo = (req, res, next) => {
+    res.set("Content-Type", req.post.photo.contentType);
+    return res.send(req.post.photo.data);
+};
