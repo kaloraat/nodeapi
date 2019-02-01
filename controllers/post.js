@@ -22,7 +22,7 @@ exports.getPosts = (req, res) => {
         .populate("postedBy", "_id name")
         .select("_id title body")
         .then(posts => {
-            res.json({ posts });
+            res.json(posts);
         })
         .catch(err => console.log(err));
 };
