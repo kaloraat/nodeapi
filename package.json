@@ -4,7 +4,10 @@
   "description": "A Node Js API",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon app.js"
+    "start": "node index.js",
+    "server": "nodemon app.js",
+    "client": "npm run start --prefix react-front",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [
     "node",
@@ -14,6 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "concurrently": "^4.1.0",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",

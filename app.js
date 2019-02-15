@@ -25,7 +25,7 @@ const postRoutes = require("./routes/post");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 // apiDocs
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
     fs.readFile("docs/apiDocs.json", (err, data) => {
         if (err) {
             res.status(400).json({
@@ -43,9 +43,9 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(expressValidator());
 app.use(cors());
-app.use("/", postRoutes);
-app.use("/", authRoutes);
-app.use("/", userRoutes);
+app.use("/api", postRoutes);
+app.use("/api", authRoutes);
+app.use("/api", userRoutes);
 app.use(function(err, req, res, next) {
     if (err.name === "UnauthorizedError") {
         res.status(401).json({ error: "Unauthorized!" });
