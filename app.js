@@ -37,7 +37,7 @@ app.get("/api", (req, res) => {
     });
 });
 
-// middleware
+// middleware -
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(cookieParser());
