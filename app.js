@@ -11,6 +11,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 // db
+// mongodb://kaloraat:dhungel8@ds257054.mlab.com:57054/nodeapi
 // MONGO_URI=mongodb://localhost/nodeapi
 mongoose
     .connect(process.env.MONGO_URI, { useNewUrlParser: true })
