@@ -39,7 +39,7 @@ exports.getPosts = async (req, res) => {
     // get current page from req.query or use default value of 1
     const currentPage = req.query.page || 1;
     // return 3 posts per page
-    const perPage = 3;
+    const perPage = 6;
     let totalItems;
 
     const posts = await Post.find()
@@ -52,7 +52,7 @@ exports.getPosts = async (req, res) => {
                 .populate("comments", "text created")
                 .populate("comments.postedBy", "_id name")
                 .populate("postedBy", "_id name")
-                .sort({ date: -1 })
+                .sort({ created: -1 })
                 .limit(perPage)
                 .select("_id title body likes");
         })
