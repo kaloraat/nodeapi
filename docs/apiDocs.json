@@ -1,12 +1,12 @@
 {
-        "/": "api docs",
-        "/signup": "signup",
-        "/signin": "signin",
-        "/signout": "signout",
-        "/users": "get all users",
-        "/user/:userId": "get/update/delete user",
-        "/posts": "get all posts",
-        "/post/new/:userId": "create new post",
-        "/posts/by/:userId": "get posts by user",
-        "/post/:postId": "update/delete post"
+        "/api": "api docs",
+        "/api/signup": "signup",
+        "/api/signin": "signin",
+        "/api/signout": "signout",
+        "/api/users": "get all users",
+        "/api/user/:userId": "get/update/delete user",
+        "/api/posts": "get all posts",
+        "/api/post/new/:userId": "create new post",
+        "/api/posts/by/:userId": "get posts by user",
+        "/api/post/:postId": "update/delete post"
 }
