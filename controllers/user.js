@@ -25,7 +25,7 @@ exports.hasAuthorization = (req, res, next) => {
 
     const authorized = sameUser || adminUser;
 
-    console.log("req.profile ", req.profile, " req.auth ", req.auth);
+    // console.log("req.profile ", req.profile, " req.auth ", req.auth);
     console.log("SAMEUSER", sameUser, "ADMINUSER", adminUser);
 
     if (!authorized) {
@@ -71,6 +71,7 @@ exports.getUser = (req, res) => {
 
 exports.updateUser = (req, res, next) => {
     let form = new formidable.IncomingForm();
+    // console.log("incoming form data: ", form);
     form.keepExtensions = true;
     form.parse(req, (err, fields, files) => {
         if (err) {
@@ -80,8 +81,11 @@ exports.updateUser = (req, res, next) => {
         }
         // save user
         let user = req.profile;
+        // console.log("user in update: ", user);
         user = _.extend(user, fields);
+
         user.updated = Date.now();
+        // console.log("USER FORM DATA UPDATE: ", user);
 
         if (files.photo) {
             user.photo.data = fs.readFileSync(files.photo.path);
@@ -96,6 +100,7 @@ exports.updateUser = (req, res, next) => {
             }
             user.hashed_password = undefined;
             user.salt = undefined;
+            // console.log("user after update with formdata: ", user);
             res.json(user);
         });
     });

@@ -8,6 +8,7 @@ exports.postById = (req, res, next, id) => {
         .populate("postedBy", "_id name")
         .populate("comments.postedBy", "_id name")
         .populate("postedBy", "_id name role")
+        .select("_id title body created likes")
         .exec((err, post) => {
             if (err || !post) {
                 return res.status(400).json({
@@ -52,9 +53,9 @@ exports.getPosts = async (req, res) => {
                 .populate("comments", "text created")
                 .populate("comments.postedBy", "_id name")
                 .populate("postedBy", "_id name")
-                .sort({ created: -1 })
+                .select("_id title body created likes")
                 .limit(perPage)
-                .select("_id title body created likes");
+                .sort({ created: -1 });
         })
         .then(posts => {
             res.status(200).json(posts);
