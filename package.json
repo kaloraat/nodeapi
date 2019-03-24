@@ -5,9 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node index.js",
-    "server": "nodemon app.js",
-    "client": "npm run start --prefix react-front",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "nodemon app.js"
   },
   "keywords": [
     "node",
