@@ -4,7 +4,7 @@
   "description": "A Node Js API",
   "main": "app.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node app.js",
     "dev": "nodemon app.js"
   },
   "keywords": [
@@ -23,6 +23,7 @@
     "express-jwt": "^5.3.1",
     "express-validator": "^5.3.1",
     "formidable": "^1.2.1",
+    "google-auth-library": "^4.2.4",
     "jsonwebtoken": "^8.4.0",
     "lodash": "^4.17.11",
     "mongoose": "^5.4.3",
