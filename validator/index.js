@@ -51,8 +51,9 @@ exports.userSignupValidator = (req, res, next) => {
     next();
 };
 
-exports.userSigninValidator = (request, response, next) => {
-    request
+exports.userSigninValidator = (req, res, next) => {
+    req.check('email', 'Email is required').notEmpty();
+    req
         .check('email', 'Email must be between 3 to 32 characters')
         .matches(
             /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
@@ -62,8 +63,8 @@ exports.userSigninValidator = (request, response, next) => {
             min: 4,
             max: 32
         });
-    request.check('password', 'Invalid Social Login Token!').notEmpty();
-    request
+   req.check('password', 'Password is required').notEmpty();
+    req
         .check('password')
         .isLength({ min: 6 })
         .withMessage('Your social login token is invalid!');
