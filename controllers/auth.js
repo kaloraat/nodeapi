@@ -73,6 +73,8 @@ exports.forgotPassword = (req, res) => {
         const token = jwt.sign({ _id: user._id, iss: process.env.APP_NAME }, process.env.JWT_SECRET);
 
         // email data
+        // Change RESET_PASSWORD to CLIENT_URL if you are in a Development Environment, as
+        // RESET_PASSWORD is only used in production environments
         const emailData = {
             from: 'noreply@node-react.com',
             to: email,
