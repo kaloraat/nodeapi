@@ -12,6 +12,7 @@ MONGO_URI=mongodb://localhost:27017/nodeapi
 PORT=8080
 JWT_SECRET=xxxxxx
 CLIENT_URL=http://localhost:3000
+RESET_PASSWORD=://[enter_public_ip_for_production]
 REACT_APP_GOOGLE_CLIENT_ID=xxxxxx.apps.googleusercontent.com
 ```
 
