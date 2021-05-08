@@ -25,7 +25,7 @@
     "formidable": "^1.2.1",
     "google-auth-library": "^4.2.4",
     "jsonwebtoken": "^8.4.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "mongoose": "^5.4.3",
     "mongoose-mongodb-errors": "0.0.2",
     "morgan": "^1.9.1",
