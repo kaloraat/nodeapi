@@ -17,7 +17,8 @@ dotenv.config();
 // mongodb+srv://robertchou_admin:Aeiourc2491@nodeapi-p2o93.mongodb.net/nodeapi?retryWrites=true&w=majority
 mongoose
     .connect(process.env.MONGO_URI, {
-        useNewUrlParser: true
+        useNewUrlParser: true,
+        useUnifiedTopology: true
     })
     .then(() => console.log('DB Connected'));
 
