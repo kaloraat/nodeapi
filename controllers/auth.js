@@ -6,16 +6,68 @@ const _ = require('lodash');
 const { OAuth2Client } = require('google-auth-library');
 const { sendEmail } = require('../helpers');
 
-exports.signup = async (req, res) => {
-    const userExists = await User.findOne({ email: req.body.email });
-    if (userExists)
-        return res.status(403).json({
-            error: 'Email is taken!'
+// exports.signup = async (req, res) => {
+//     const userExists = await User.findOne({ email: req.body.email });
+//     if (userExists)
+//         return res.status(403).json({
+//             error: 'Email is taken!'
+//         });
+//     const user = await new User(req.body);
+//     await user.save();
+//     res.status(200).json({ message: 'Signup success! Please login.' });
+// };
+
+exports.signup = (req, res) => {
+    //  console.log('req.body', req.body);
+    const user = new User(req.body);
+    user.save((err, user) => {
+        if (err) {
+            return res.status(400).json({
+                err: errorHandler(err)
+            });
+        }
+        user.salt = undefined;
+        user.hashed_password = undefined;
+        res.json({
+            user
         });
-    const user = await new User(req.body);
-    await user.save();
-    res.status(200).json({ message: 'Signup success! Please login.' });
+    });
 };
+
+// exports.signin = (req, res) => {
+//     //find the user based on email
+//     const { email, password } = req.body;
+//     User.findOne({ email }, (err, user) => {
+//         if (err || !user) {
+//             return res.status(400).json({
+//                 error: 'User with that email does not exists. Please Signup'
+//             });
+//         }
+//         //if used is found make sure the email and password match
+//         // create authenticate methode in user model
+//         if (!user.authenticate(password)) {
+//             return res.status(401).json({
+//                 error: 'Email and Password do not match'
+//             });
+//         }
+//         //generate a signed toke with user id and secret.
+//         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+//         //persit the token as 't' in cookie with expire date
+//         res.cookie('t', token, { expire: new Date() + 9999 });
+//         //return response with user and token to fronend client
+//         const { _id, name, email, role } = user;
+//         return res.json({ token, user: { _id, email, name, role } });
+//     });
+// };
+
+// exports.signout = (req, res) => {
+//     res.clearCookie('t');
+//     res.json({ message: 'User Successfully Signed Out' });
+// };
+// exports.requireSignin = expressJwt({
+//     secret: process.env.JWT_SECRET,
+//     userProperty: 'auth'
+// });
 
 exports.signin = (req, res) => {
     // find the user based on email
@@ -77,12 +129,8 @@ exports.forgotPassword = (req, res) => {
             from: 'noreply@node-react.com',
             to: email,
             subject: 'Password Reset Instructions',
-            text: `Please use the following link to reset your password: ${
-                process.env.CLIENT_URL
-            }/reset-password/${token}`,
-            html: `<p>Please use the following link to reset your password:</p> <p>${
-                process.env.CLIENT_URL
-            }/reset-password/${token}</p>`
+            text: `Please use the following link to reset your password: ${process.env.CLIENT_URL}/reset-password/${token}`,
+            html: `<p>Please use the following link to reset your password:</p> <p>${process.env.CLIENT_URL}/reset-password/${token}</p>`
         };
 
         return user.updateOne({ resetPasswordLink: token }, (err, success) => {
